@@ -39,20 +39,20 @@ namespace CollapseLauncher
             if (IsCustomBG)
             {
                 string BGPath = GetAppConfigValue("CustomBGPath").ToString();
-                regionBackgroundProp.imgLocalPath = string.IsNullOrEmpty(BGPath) ? AppDefaultBG : BGPath;
+                regionBackgroundProp.mediaLocalPath = string.IsNullOrEmpty(BGPath) ? AppDefaultBG : BGPath;
             }
             else
             {
                 if (!await TryLoadResourceInfo(ResourceLoadingType.DownloadBackground, ConfigV2Store.CurrentConfigV2, ShowLoadingMsg))
                 {
-                    regionBackgroundProp.imgLocalPath = AppDefaultBG;
+                    regionBackgroundProp.mediaLocalPath = AppDefaultBG;
                 }
             }
 
             if (!IsCustomBG || IsFirstStartup)
             {
-                BackgroundImgChanger.ChangeBackground(regionBackgroundProp.imgLocalPath, IsCustomBG);
-                await BackgroundImgChanger.WaitForBackgroundToLoad();
+                BackgroundMediaChanger.ChangeBackground(regionBackgroundProp.mediaLocalPath, IsCustomBG);
+                await BackgroundMediaChanger.WaitForBackgroundToLoad();
                 IsFirstStartup = false;
             }
 
@@ -280,11 +280,11 @@ namespace CollapseLauncher
             uint Width = (uint)((double)m_actualMainFrameSize.Width * 1.5 * m_appDPIScale);
             uint Height = (uint)((double)m_actualMainFrameSize.Height * 1.5 * m_appDPIScale);
 
-            FileStream stream = new FileStream(regionBackgroundProp.imgLocalPath, FileMode.Open, FileAccess.Read);
+            FileStream stream = new FileStream(regionBackgroundProp.mediaLocalPath, FileMode.Open, FileAccess.Read);
 
             (PaletteBitmap, BackgroundBitmap) = await GetResizedBitmap(stream, Width, Height);
 
-            ApplyAccentColor(this, PaletteBitmap, regionBackgroundProp.imgLocalPath);
+            ApplyAccentColor(this, PaletteBitmap, regionBackgroundProp.mediaLocalPath);
 
             FadeOutFrontBg();
             FadeOutBackBg();

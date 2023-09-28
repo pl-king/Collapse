@@ -84,7 +84,7 @@ namespace CollapseLauncher.Pages
         {
             try
             {
-                BackgroundImgChanger.ToggleBackground(false);
+                BackgroundMediaChanger.ToggleBackground(false);
                 GetCurrentGameState();
 
                 if (!GetAppConfigValue("ShowEventsPanel").ToBool())
