@@ -278,12 +278,18 @@ namespace CollapseLauncher
             {
                 if (Path.GetExtension(regionBackgroundProp.mediaLocalPath) == supportedVideoTypes[i])
                 {
+                    LogWriteLine($"[CustomBG Module] Your background is of extension " +
+                                 $"{Path.GetExtension(regionBackgroundProp.mediaLocalPath)}, breaking!", 
+                        LogType.Debug, false);
                     break;
                 }
                 else
                 {
                     try
                     {
+                        LogWriteLine($"[CustomBG Module] Your background is of extension " +
+                                     $"{Path.GetExtension(regionBackgroundProp.mediaLocalPath)}, trying to " +
+                                     $"run background async task...", LogType.Debug, false);
                         await RunApplyBackgroundTask();
                     }
                     catch (Exception ex)
