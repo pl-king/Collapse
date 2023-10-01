@@ -259,7 +259,7 @@ namespace CollapseLauncher
 
         private async void CustomBackgroundChanger_Event(object sender, BackgroundMediaProperty e)
         {
-            string[] supportedVideoTypes = new[] { "mp4", "mpg", "m4v" };
+            string[] supportedVideoTypes = new[] { ".mp4", ".mpg", ".m4v" };
 
             e.IsMediaLoaded = false;
             regionBackgroundProp.mediaLocalPath = e.MediaPath;
