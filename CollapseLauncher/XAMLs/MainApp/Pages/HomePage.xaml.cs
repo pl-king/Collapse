@@ -120,7 +120,7 @@ namespace CollapseLauncher.Pages
 
                 this.InitializeComponent();
 
-                BackgroundImgChanger.ToggleBackground(false);
+                BackgroundAssetChanger.ToggleBackground(false);
                 CheckIfRightSideProgress();
                 GetCurrentGameState();
 

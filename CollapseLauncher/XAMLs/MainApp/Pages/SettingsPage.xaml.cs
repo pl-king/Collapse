@@ -73,7 +73,7 @@ namespace CollapseLauncher.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            BackgroundImgChanger.ToggleBackground(true);
+            BackgroundAssetChanger.ToggleBackground(true);
         }
         #endregion
 
@@ -297,13 +297,25 @@ namespace CollapseLauncher.Pages
 
         private async void SelectBackgroundImg(object sender, RoutedEventArgs e)
         {
-            string file = await GetFilePicker(new Dictionary<string, string> { { "Supported formats", "*.jpg;*.jpeg;*.jfif;*.png;*.bmp;*.tiff;*.tif;*.webp" } });
+            string file = await GetFilePicker(new Dictionary<string, string> { { "Supported formats", "*.jpg;*.jpeg;*.jfif;*.png;*.bmp;*.tiff;*.tif;*.webp;*.mp4" } });
+            string[] supprtedVideoTypes = { "mp4", "mpeg" };
             if (!string.IsNullOrEmpty(file))
             {
-                regionBackgroundProp.imgLocalPath = file;
-                SetAndSaveConfigValue("CustomBGPath", file);
-                BGPathDisplay.Text = file;
-                BackgroundImgChanger.ChangeBackground(file);
+                if (file.Contains(supprtedVideoTypes.ToString() ?? string.Empty))
+                {
+                    // TODO: make this an async function or delegate to function instead of duplicating code twice here
+                    regionBackgroundProp.vidLocalPath = file;
+                    SetAndSaveConfigValue("CustomBGPath", file);
+                    BGPathDisplay.Text = file;
+                    BackgroundAssetChanger.ChangeBackground(file);
+                }
+                else
+                {
+                    regionBackgroundProp.imgLocalPath = file;
+                    SetAndSaveConfigValue("CustomBGPath", file);
+                    BGPathDisplay.Text = file;
+                    BackgroundAssetChanger.ChangeBackground(file);    
+                }
             }
         }
 
@@ -405,7 +417,7 @@ namespace CollapseLauncher.Pages
                         }
                     }
                     BGPathDisplay.Text = regionBackgroundProp.imgLocalPath;
-                    BackgroundImgChanger.ChangeBackground(regionBackgroundProp.imgLocalPath);
+                    BackgroundAssetChanger.ChangeBackground(regionBackgroundProp.imgLocalPath);
                     AppBGCustomizer.Visibility = Visibility.Visible;
                     AppBGCustomizerNote.Visibility = Visibility.Visible;
                 }

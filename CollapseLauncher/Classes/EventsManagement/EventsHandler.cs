@@ -294,34 +294,34 @@ namespace CollapseLauncher
     }
     #endregion
     #region BackgroundRegion
-    internal static class BackgroundImgChanger
+    internal static class BackgroundAssetChanger
     {
-        static BackgroundImgChangerInvoker invoker = new BackgroundImgChangerInvoker();
+        static BackgroundAssetChangerInvoker invoker = new BackgroundAssetChangerInvoker();
         public static async Task WaitForBackgroundToLoad() => await invoker.WaitForBackgroundToLoad();
-        public static void ChangeBackground(string ImgPath, bool IsCustom = true) => invoker.ChangeBackground(ImgPath, IsCustom);
+        public static void ChangeBackground(string CustomBgPath, bool IsCustom = true) => invoker.ChangeBackground(CustomBgPath, IsCustom);
         public static void ToggleBackground(bool Hide) => invoker.ToggleBackground(Hide);
     }
 
-    internal class BackgroundImgChangerInvoker
+    internal class BackgroundAssetChangerInvoker
     {
-        public static event EventHandler<BackgroundImgProperty> ImgEvent;
-        public static event EventHandler<bool> IsImageHide;
-        BackgroundImgProperty property;
-        public async Task WaitForBackgroundToLoad() => await Task.Run(() => { while (!property.IsImageLoaded) { } });
-        public void ChangeBackground(string ImgPath, bool IsCustom) => ImgEvent?.Invoke(this, property = new BackgroundImgProperty(ImgPath, IsCustom));
-        public void ToggleBackground(bool Hide) => IsImageHide?.Invoke(this, Hide);
+        public static event EventHandler<BackgroundAssetProperty> BgEvent;
+        public static event EventHandler<bool> IsBgHide;
+        BackgroundAssetProperty property;
+        public async Task WaitForBackgroundToLoad() => await Task.Run(() => { while (!property.IsAssetLoaded) { } });
+        public void ChangeBackground(string CustomBgPath, bool IsCustom) => BgEvent?.Invoke(this, property = new BackgroundAssetProperty(CustomBgPath, IsCustom));
+        public void ToggleBackground(bool Hide) => IsBgHide?.Invoke(this, Hide);
     }
 
-    internal class BackgroundImgProperty
+    internal class BackgroundAssetProperty
     {
-        internal BackgroundImgProperty(string ImgPath, bool IsCustom)
+        internal BackgroundAssetProperty(string CustomBgPath, bool IsCustom)
         {
-            this.ImgPath = ImgPath;
+            this.CustomBgPath = CustomBgPath;
             this.IsCustom = IsCustom;
         }
 
-        public bool IsImageLoaded { get; set; } = false;
-        public string ImgPath { get; private set; }
+        public bool IsAssetLoaded { get; set; } = false;
+        public string CustomBgPath { get; private set; }
         public bool IsCustom { get; private set; }
     }
     #endregion
