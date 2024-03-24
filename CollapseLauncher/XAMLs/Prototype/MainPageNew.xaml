@@ -23,11 +23,12 @@
                VerticalAlignment="Center"
                Opacity="1"/>
         <NavigationView x:Name="nvSample"
+          
                         IsSettingsVisible="True"
                         IsBackButtonVisible="Auto"
                         IsBackEnabled="True"
-                        PaneTitle="Menu"
-                        PaneDisplayMode="LeftCompact"
+                        PaneTitle="菜单"
+            
                         Background="{ThemeResource NavigationBarBrush}"
                         ExpandedModeThresholdWidth="500"
                         SelectionFollowsFocus="Disabled"
@@ -35,7 +36,7 @@
                         PaneOpening="nvSample_PaneOpening"
                         PaneClosing="nvSample_PaneClosing">
             <NavigationView.MenuItems>
-                <NavigationViewItem Content="Menu Item1"
+                <NavigationViewItem Content="我的直播间"
                                     Tag="SamplePage1"
                                     x:Name="SamplePage1Item">
                     <NavigationViewItem.Icon>
@@ -43,7 +44,7 @@
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItemHeader Content="Actions"/>
-                <NavigationViewItem Content="Menu Item2"
+                <NavigationViewItem Content="智能互动"
                                     Tag="SamplePage2"
                                     x:Name="SamplePage2Item"
                                     SelectsOnInvoked="True">
